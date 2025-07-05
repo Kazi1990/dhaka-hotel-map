@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Top 5-Star Hotels in Dhaka</title>
+  <meta charset="UTF-8" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    #map {
+      height: 500px;
+      width: 100%;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h2>Top 5-Star Hotels in Dhaka, Bangladesh</h2>
+  <p>Explore the most luxurious hotels in Dhaka using the interactive map below. Each hotel marker is clickable and shows the hotel name.</p>
+
+  <div id="map"></div>
+
+  <script>
+    function initMap() {
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 13,
+        center: { lat: 23.7806, lng: 90.4193 },
+      });
+
+      const hotels = [
+        { name: "Pan Pacific Sonargaon Dhaka", position: { lat: 23.7488, lng: 90.3915 } },
+        { name: "InterContinental Dhaka", position: { lat: 23.7394, lng: 90.3952 } },
+        { name: "The Westin Dhaka", position: { lat: 23.7935, lng: 90.4142 } },
+        { name: "Le Méridien Dhaka", position: { lat: 23.8285, lng: 90.4177 } },
+        { name: "Radisson Blu Dhaka Water Garden", position: { lat: 23.8276, lng: 90.4105 } }
+      ];
+
+      hotels.forEach(hotel => {
+        const marker = new google.maps.Marker({
+          position: hotel.position,
+          map,
+          title: hotel.name
+        });
+
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<strong>${hotel.name}</strong>`
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      });
+    }
+  </script>
+
+  <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDEGuzwsqxRyAHkEurZHJrNRmyzYdCi4pw&callback=initMap">
+  </script>
+</body>
+</html>
